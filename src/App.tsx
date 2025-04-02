@@ -21,8 +21,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemsPerPage = 6; // Número de elementos por página
-
+  const itemsPerPage = 6;
   const totalPages = Math.ceil(list.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
 
@@ -47,7 +46,7 @@ function App() {
         <div>Cargando...</div>
       ) : (
         <>
-          <div className="w-full h-full   border-gray-500 border-2 rounded-md grid grid-rows-[1fr_10fr] items-center">
+          <div className="w-full h-full border-gray-500 border-2 rounded-md grid grid-rows-[1fr_10fr] items-center">
             <div className="  w-full h-10 grid gap-4 px-10 grid-cols-8 items-center justify-center">
               <div className=" w-full flex items-center justify-center font-bold ">
                 Id

@@ -43,9 +43,13 @@ export default function Bus(prop: Props) {
     <>
       {loading ? (
         isError ? (
-          <div>Error al cargar los datos </div>
+          <div className="flex items-center justify-center w-full h-24 border-1 border-white p-2">
+            Error al cargar los datos
+          </div>
         ) : (
-          <div>Cargando...</div>
+          <div className="flex items-center justify-center w-full h-24 border-1 border-white p-2">
+            Cargando...
+          </div>
         )
       ) : (
         <div className="w-full h-24 grid grid-cols-8 ">
@@ -75,7 +79,7 @@ export default function Bus(prop: Props) {
               <div></div>
             ) : (
               <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className=" text-white font-bold py-2 px-4 rounded"
                 onClick={() =>
                   alert(
                     `Datos del bus:
