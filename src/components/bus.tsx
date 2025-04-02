@@ -48,35 +48,51 @@ export default function Bus(prop: Props) {
           <div>Cargando...</div>
         )
       ) : (
-        <div className=" w-5/6 md:w-4/6 h-full  flex flex-col gap-4  justify-center">
-          <div>
-            <div className="flex gap-4 pb-2 justify-between">
-              <div className="text-yellow-300">NUMERO DE BUS:</div>
-              <div> {bus?.numeroBus}</div>
-            </div>
-            <div className="flex gap-4 pb-2 justify-between">
-              <div className="text-yellow-300">PLACA: </div>
-              <div>{bus?.placa}</div>
-            </div>
-            <div className="flex gap-4 pb-2 justify-between">
-              <div className="text-yellow-300">MARCA: </div>
-              <div>{bus?.marca.nombre}</div>
-            </div>
-            <div className="flex gap-4 pb-2 justify-between">
-              <div className="text-yellow-300">Fecha de registro:</div>
-              <div> {bus?.fechaCreacion}</div>
-            </div>
-
-            <div className="flex gap-4 pb-2 justify-between">
-              <div className="text-yellow-300">Caracteristicas: </div>
-              <div>{bus?.caracteristicas}</div>
-            </div>
-            <div className="flex gap-4 pb-2 justify-between">
-              <div className="text-yellow-300">ESTADO:</div>
-              <div className={`font-bold ${bus?.activo ? "" : "text-red-400"}`}>
-                {bus?.activo ? "ACTIVO" : "INACTIVO"}
-              </div>
-            </div>
+        <div className="w-full h-24 grid grid-cols-8 ">
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {bus?.id}
+          </div>
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {bus?.numeroBus}
+          </div>
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {bus?.placa}
+          </div>
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {bus?.fechaCreacion}
+          </div>
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {bus?.caracteristicas}
+          </div>
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {bus?.marca.nombre}
+          </div>
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {bus?.activo}
+          </div>
+          <div className="flex items-center justify-center border-1 border-white p-2">
+            {!bus ? (
+              <div></div>
+            ) : (
+              <button
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                onClick={() =>
+                  alert(
+                    `Datos del bus:
+                  id: ${bus?.id},
+                  nombre: ${bus?.nombre},
+                  numeroBus: ${bus?.numeroBus},
+                  placa: ${bus?.placa},
+                  fechaCreacion: ${bus?.fechaCreacion},
+                  caracteristicas: ${bus?.caracteristicas},
+                  marca: ${bus?.marca.nombre},
+                  activo: ${bus?.activo},`
+                  )
+                }
+              >
+                Detalle
+              </button>
+            )}
           </div>
         </div>
       )}

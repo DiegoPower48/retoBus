@@ -17,16 +17,14 @@ interface List {
 }
 
 function App() {
-  const [bus, setBus] = useState<number | null>(null);
   const [list, setList] = useState<List[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const itemsPerPage = 5;
+  const itemsPerPage = 6; // Número de elementos por página
+
   const totalPages = Math.ceil(list.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = list.slice(startIndex, endIndex);
 
   const loadBus = async () => {
     try {
@@ -44,56 +42,72 @@ function App() {
   }, []);
 
   return (
-    <div className="w-screen h-screen grid grid-cols-1 grid-rows-[5fr_1fr] place-items-center ">
-      <div className="w-full md:w-4/6 h-5/6 p-20  border-gray-500 border-2 rounded-md flex items-center justify-center">
-        {bus === null ? (
-          <div className="w-full h-full flex items-center justify-center text-2xl text-gray-500">
-            Seleccione un número de bus para ver detalles
-          </div>
-        ) : (
-          <Bus id={bus} />
-        )}
-      </div>
+    <div className="w-screen h-screen grid grid-cols-1 grid-rows-[5fr_1fr] place-items-center p-4">
       {loading ? (
         <div>Cargando...</div>
       ) : (
-        <div className="w-full h-full flex items-center justify-center flex-col gap-4 p-10">
-          <ul className="w-full h-full flex items-center justify-center gap-10">
-            {currentItems.map((item, index) => (
-              <li
-                key={item.id}
-                className="px-4 py-3 rounded-md text-white opacity-50 hover:opacity-100 hover:bg-blue-400 cursor-pointer active:bg-blue-600"
-                onClick={() => setBus(item.id)}
-              >
-                {startIndex + index + 1}
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex gap-10 mt-4">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-3 py-1 bg-gray-300 rounded-md disabled:opacity-50"
-            >
-              Anterior
-            </button>
-
-            <span>
-              Página {currentPage} de {totalPages}
-            </span>
-
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 bg-gray-300 rounded-md disabled:opacity-50"
-            >
-              Siguiente
-            </button>
+        <>
+          <div className="w-full h-full   border-gray-500 border-2 rounded-md grid grid-rows-[1fr_10fr] items-center">
+            <div className="  w-full h-10 grid gap-4 px-10 grid-cols-8 items-center justify-center">
+              <div className=" w-full flex items-center justify-center font-bold ">
+                Id
+              </div>
+              <div className="w-full flex items-center justify-center font-bold">
+                Número de bus
+              </div>
+              <div className="w-full flex items-center justify-center font-bold">
+                Placa
+              </div>
+              <div className="w-full flex items-center text-center font-bold">
+                Fecha de Creación
+              </div>
+              <div className="w-full flex items-center justify-center font-bold">
+                Caracteristicas
+              </div>
+              <div className="w-full flex items-center justify-center font-bold">
+                Marca de bus
+              </div>
+              <div className="w-full flex items-center text-center justify-center font-bold">
+                Activo o Inactivo
+              </div>
+              <div className="w-full flex items-center justify-center font-bold"></div>
+            </div>
+            <div className="w-full  gap-4 px-10 ">
+              <Bus id={startIndex + 1} />
+              <Bus id={startIndex + 2} />
+              <Bus id={startIndex + 3} />
+              <Bus id={startIndex + 4} />
+              <Bus id={startIndex + 5} />
+              <Bus id={startIndex + 6} />
+            </div>
           </div>
-        </div>
+
+          <div className="w-full h-full flex items-center justify-center flex-col gap-4 p-10">
+            <div className="flex gap-10 mt-4">
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1 bg-gray-300 rounded-md disabled:opacity-50"
+              >
+                Anterior
+              </button>
+
+              <span>
+                Página {currentPage} de {totalPages}
+              </span>
+
+              <button
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 bg-gray-300 rounded-md disabled:opacity-50"
+              >
+                Siguiente
+              </button>
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
